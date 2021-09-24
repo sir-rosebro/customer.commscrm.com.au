@@ -20,3 +20,25 @@ export const signInFail = (payload) => {
         payload
     }
 }
+
+export const signup = (payload) => {
+    console.log('action got hit');
+    return {
+        type:authActionTypes.SIGN_UP,
+        payload
+    }
+}
+
+export const signupFail = (payload) => {
+    return {
+        type:authActionTypes.SIGN_UP_FAIL,
+        payload
+    }
+}
+
+export const signupSuccess = (payload) => {
+    return {
+        type:authActionTypes.SIGN_UP_SUCCESS,
+        payload
+    }
+}

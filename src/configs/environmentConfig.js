@@ -1,6 +1,6 @@
 
 const dev = {
-    API_ENDPOINT_URL: 'http://localhost:8181/api/'
+    API_ENDPOINT_URL: 'http://localhost:4000/api/'
 }
 
 const prod = {
@@ -12,6 +12,9 @@ const getEnv = () => {
     switch(process.env.APP_ENVIRONMENT) {
         case 'production':
             env = prod;
+            break;
+        case 'development':
+            env = dev;
             break;
         default:
             env = dev;

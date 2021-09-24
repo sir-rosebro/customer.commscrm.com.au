@@ -1,3 +1,53 @@
-.signup {
-
+.sign_up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align:left;
+    min-height: 100vh;
+    .overlay {
+        position: absolute; /* Sit on top of the page content */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+    }
+    .ant-spin {
+        position: absolute;
+    }
+    .sign_up_box {
+        padding:20px;
+        
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        .sign_up_image_wrapper {
+            // border:1px solid #dedede;
+            flex-basis:40%;
+            height: 100vh;
+            position: sticky;
+            top:0px;
+            .sign_up_image_title {
+                text-align: left;
+            }
+            img {
+              width: 80%;  
+              object-fit: contain;
+            }
+        }
+        .form_wrapper {
+            flex-basis:60%;
+            #register {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+        }
+    }  
 }

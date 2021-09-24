@@ -15,7 +15,6 @@ service.interceptors.request.use(config => {
     if(jwtToken) {
         config.headers[authActionTypes.TOKEN_PAYLOAD_KEY] = jwtToken;
     }
-
     return config;
 }, error => {
     Promise.reject(error);

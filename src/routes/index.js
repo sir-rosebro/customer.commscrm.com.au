@@ -1,4 +1,4 @@
-
+import React from 'react';
 import {
     Switch,
     Route
@@ -13,9 +13,6 @@ import {
 function Routes() {
     return(
         <Switch>
-            {/* <Route path="/about">
-                <About />
-            </Route> */}
             
             <Route path="/sign-in">
                 <SignIn />
@@ -24,14 +21,6 @@ function Routes() {
             <Route path="/sign-up">
                 <SignUp />
             </Route>
-
-            {/* <Route path="/contact/:id">
-                <Contact />
-            </Route>
-            
-            <Route path="/contact">
-                <AllContacts />
-            </Route> */}
 
             <Route path="/">
                 <Landing />
