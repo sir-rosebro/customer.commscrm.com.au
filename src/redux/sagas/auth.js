@@ -1,5 +1,5 @@
-
 import { all, takeLatest, put, fork, call } from 'redux-saga/effects';
+import { message } from 'antd';
 
 import { authActionTypes } from '../actionTypes';
 import { AuthService } from '../../services';
@@ -7,44 +7,42 @@ import {
     signInSuccess,
     signInFail,
     signupSuccess,
-    signupFail
-}
-from '../actions';
+    signupFail,
+} from '../actions';
 
 function* signIn() {
-    yield takeLatest(authActionTypes.SIGN_IN, function*({payload}) {
-        try{
-            const {data:{status, customer}} = yield call(AuthService.signIn, payload);
-            if(status === 'ERROR') {
+    yield takeLatest(authActionTypes.SIGN_IN, function* ({ payload }) {
+        try {
+            const { status, token } = yield call(AuthService.signIn, payload);
+            if (status === 'ERROR') {
                 throw Error();
             }
-            yield put(signInSuccess(customer));
+            yield put(signInSuccess(token));
+        } catch {
+            const errorMessage = 'Failed to Sign In';
+            message.error(errorMessage);
+            yield put(signInFail(errorMessage));
         }
-        catch {
-            yield put(signInFail('Failed to Sign In customer'))
-        }
-    })
+    });
 }
 
 function* signup() {
-    yield takeLatest(authActionTypes.SIGN_UP, function*({payload}) {
+    yield takeLatest(authActionTypes.SIGN_UP, function* ({ payload }) {
         console.log('redux saga got hit');
-        try{
-            const {data:{status, user}} = yield call(AuthService.signup, payload);
-            if(status === 'ERROR') {
+        try {
+            const { status, user } = yield call(AuthService.signup, payload);
+            if (status === 'ERROR') {
                 throw Error();
             }
             yield put(signupSuccess(user));
+        } catch {
+            const errorMessage = 'Failed to Sign Up';
+            message.error(errorMessage);
+            yield put(signupFail(errorMessage));
         }
-        catch {
-            yield put(signupFail('Failed to Sign In'))
-        }
-    })
+    });
 }
 
 export default function* authSaga() {
-    yield all([
-        fork(signIn),
-        fork(signup)
-    ]);
+    yield all([fork(signIn), fork(signup)]);
 }

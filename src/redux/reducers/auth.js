@@ -4,47 +4,49 @@ const inititalState = {
     loading: false,
     errorMessage: '',
     loggedInUser: null,
-}
+    redirect: null,
+};
 
 const auth = (state = inititalState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case authActionTypes.SIGN_IN:
             return {
                 ...state,
-                loading: true
-            }
+                loading: true,
+            };
         case authActionTypes.SIGN_IN_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                loggedInUser: action.payload
-        }
+                token: action.payload,
+            };
         case authActionTypes.SIGN_IN_FAIL:
             return {
                 ...state,
                 loading: false,
-                errorMessage: action.payload
-        }
+                errorMessage: action.payload,
+            };
         case authActionTypes.SIGN_UP:
             return {
                 ...state,
-                loading:true
-            }
-        case authActionTypes.SIGN_UP_SUCCESS: 
+                loading: true,
+            };
+        case authActionTypes.SIGN_UP_SUCCESS:
             return {
                 ...state,
-                loading:false,
-                loggedInUser:action.payload
-            }
+                loading: false,
+                loggedInUser: action.payload,
+                redirect: '/register/success',
+            };
         case authActionTypes.SIGN_UP_FAIL:
             return {
                 ...state,
-                loading:false,
-                errorMessage:action.payload
-            }
-        default: 
+                loading: false,
+                errorMessage: action.payload,
+            };
+        default:
             return state;
     }
-}
+};
 
 export default auth;

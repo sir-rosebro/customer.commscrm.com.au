@@ -1,31 +1,29 @@
 import React from 'react';
-import {
-    Switch,
-    Route
-} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
-import {
-    Landing,
-    SignIn,
-    SignUp
-} from '../pages';
+import { Landing, SignIn, SignUp, Dashboard } from '../pages';
+
+import PrivateRoute from './PrivateRoute';
+import AuthRoute from './AuthRoute';
 
 function Routes() {
-    return(
+    return (
         <Switch>
-            
-            <Route path="/sign-in">
+            <AuthRoute path="/sign-in">
                 <SignIn />
-            </Route>
+            </AuthRoute>
 
-            <Route path="/sign-up">
+            <AuthRoute path="/sign-up">
                 <SignUp />
-            </Route>
+            </AuthRoute>
+
+            <PrivateRoute path="/dashboard">
+                <Dashboard />
+            </PrivateRoute>
 
             <Route path="/">
                 <Landing />
             </Route>
-            
         </Switch>
     );
 }
