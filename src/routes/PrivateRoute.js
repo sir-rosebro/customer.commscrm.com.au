@@ -1,10 +1,11 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { useToken } from '../hooks/useToken';
+import { useUser } from '../hooks/useUser';
 
 const PrivateRoute = (props) => {
-    const [token] = useToken();
-    if (!token) {
+    const user = useUser();
+
+    if (!user) {
         return <Redirect to="/sign-in" />;
     }
     return <Route {...props} />;
