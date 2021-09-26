@@ -8,6 +8,8 @@ import {
     signInFail,
     signupSuccess,
     signupFail,
+    forgotPasswordSuccess,
+    forgotPasswordFail
 } from '../actions';
 
 function* signIn() {
@@ -28,7 +30,6 @@ function* signIn() {
 
 function* signup() {
     yield takeLatest(authActionTypes.SIGN_UP, function* ({ payload }) {
-        console.log('redux saga got hit');
         try {
             const { status, user } = yield call(AuthService.signup, payload);
             if (status === 'ERROR') {
@@ -43,6 +44,22 @@ function* signup() {
     });
 }
 
+function* forgotPassword() {
+    yield takeLatest(authActionTypes.FORGOT_PASSWORD, function* ({ payload }) {
+        try {
+            const { status, message } = yield call(AuthService.forgotPassword, payload);
+            if (status === 'ERROR') {
+                throw Error();
+            }
+            yield put(forgotPasswordSuccess(message));
+        } catch {
+            const errorMessage = message;
+            message.error(errorMessage);
+            yield put(forgotPasswordFail(message));
+        }
+    });
+}
+
 export default function* authSaga() {
-    yield all([fork(signIn), fork(signup)]);
+    yield all([fork(signIn), fork(signup), fork(forgotPassword)]);
 }

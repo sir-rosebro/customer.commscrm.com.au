@@ -16,3 +16,12 @@ export const signup = async(payload) =>{
         data: payload,
     });
 }
+
+export const forgotPassword = async(payload) =>{
+    
+    return fetch({
+        url: 'customers/auth/forgot-password',
+        method: 'POST',
+        data: payload,
+    });
+}

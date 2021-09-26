@@ -29,7 +29,6 @@ const SignIn = () => {
         }
     }, [token]);
 
-    //  useSignIn();
     return (
         <div className="sign_in">
             <Form
@@ -79,7 +78,7 @@ const SignIn = () => {
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item>
 
-                    <Link className="login-form-forgot" to="">
+                    <Link className="login-form-forgot" to="/forgot-password">
                         Forgot password
                     </Link>
                 </Form.Item>

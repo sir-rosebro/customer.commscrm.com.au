@@ -44,6 +44,22 @@ const auth = (state = inititalState, action) => {
                 loading: false,
                 errorMessage: action.payload,
             };
+        case authActionTypes.FORGOT_PASSWORD:
+        return {
+            ...state,
+            loading: true,
+        };
+        case authActionTypes.FORGOT_PASSWORD_FAIL:
+            return {
+                ...state,
+                loading: false,
+                errorMessage: action.payload,
+            };
+        case authActionTypes.FORGOT_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            };
         default:
             return state;
     }
