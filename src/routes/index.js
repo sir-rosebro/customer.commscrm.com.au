@@ -30,7 +30,7 @@ function Routes() {
             </PrivateRoute>
 
             <Route path="/">
-                <Landing />
+            <Landing/>
             </Route>
         </Switch>
     );

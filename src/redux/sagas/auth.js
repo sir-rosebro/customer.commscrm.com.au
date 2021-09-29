@@ -9,7 +9,9 @@ import {
     signupSuccess,
     signupFail,
     forgotPasswordSuccess,
-    forgotPasswordFail
+    forgotPasswordFail,
+    resetPasswordSuccess,
+    resetPasswordFail
 } from '../actions';
 
 function* signIn() {
@@ -60,6 +62,23 @@ function* forgotPassword() {
     });
 }
 
+function* resetPassword() {
+    yield takeLatest(authActionTypes.RESET_PASSWORD, function* ({ payload }) {
+        try {
+            const { status, message } = yield call(AuthService.resetPassword, payload);
+            if (status === 'ERROR') {
+                yield put(resetPasswordFail(message));
+               // throw Error();
+            }
+            yield put(resetPasswordSuccess(message));
+        } catch {
+            const errorMessage = message;
+            message.error(errorMessage);
+            yield put(resetPasswordFail(message));
+        }
+    });
+}
+
 export default function* authSaga() {
-    yield all([fork(signIn), fork(signup), fork(forgotPassword)]);
+    yield all([fork(signIn), fork(signup), fork(forgotPassword), fork(resetPassword)]);
 }

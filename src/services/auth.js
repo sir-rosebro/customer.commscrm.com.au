@@ -25,3 +25,12 @@ export const forgotPassword = async(payload) =>{
         data: payload,
     });
 }
+
+export const resetPassword = async(payload) =>{
+    
+    return fetch({
+        url: 'customers/auth/reset-password',
+        method: 'POST',
+        data: payload,
+    });
+}

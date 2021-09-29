@@ -60,6 +60,23 @@ const auth = (state = inititalState, action) => {
                 ...state,
                 loading: false,
             };
+        case authActionTypes.RESET_PASSWORD:
+            return {
+                ...state,
+                loading: true,
+        };
+        case authActionTypes.RESET_PASSWORD_FAIL:
+            return {
+                ...state,
+                loading: false,
+                errorMessage: action.payload,
+        };
+        case authActionTypes.RESET_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                successMessage:action.payload,
+        };
         default:
             return state;
     }

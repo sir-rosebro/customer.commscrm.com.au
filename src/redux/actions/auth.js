@@ -63,3 +63,24 @@ export const forgotPasswordSuccess = (payload) => {
         payload
     }
 }
+
+export const resetPassword = (payload) => {
+    return {
+        type:authActionTypes.RESET_PASSWORD,
+        payload
+    }
+}
+
+export const resetPasswordFail = (payload) => {
+    return {
+        type:authActionTypes.RESET_PASSWORD_FAIL,
+        payload
+    }
+}
+
+export const resetPasswordSuccess = (payload) => {
+    return {
+        type:authActionTypes.RESET_PASSWORD_SUCCESS,
+        payload
+    }
+}
