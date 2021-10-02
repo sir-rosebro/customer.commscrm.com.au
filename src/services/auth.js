@@ -3,7 +3,7 @@ import fetch from "../shared/interceptors/fetch";
 export const signIn = async(payload) =>{
     
     return fetch({
-        url: 'customers/auth/signin',
+        url: '/auth/signin',
         method: 'POST',
         data: payload,
     });
@@ -11,7 +11,7 @@ export const signIn = async(payload) =>{
 export const signup = async(payload) =>{
     
     return fetch({
-        url: 'customers/auth/sign-up',
+        url: '/auth/sign-up',
         method: 'POST',
         data: payload,
     });
@@ -20,7 +20,7 @@ export const signup = async(payload) =>{
 export const forgotPassword = async(payload) =>{
     
     return fetch({
-        url: 'customers/auth/forgot-password',
+        url: '/auth/forgot-password',
         method: 'POST',
         data: payload,
     });
@@ -29,7 +29,7 @@ export const forgotPassword = async(payload) =>{
 export const resetPassword = async(payload) =>{
     
     return fetch({
-        url: 'customers/auth/reset-password',
+        url: '/auth/reset-password',
         method: 'POST',
         data: payload,
     });
