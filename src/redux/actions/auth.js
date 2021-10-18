@@ -42,6 +42,12 @@ export const signupSuccess = (payload) => {
     }
 }
 
+export const logOut = (payload) => {
+    return {
+        type:authActionTypes.LOG_OUT,
+        payload
+    }
+}
 
 export const forgotPassword = (payload) => {
     return {
