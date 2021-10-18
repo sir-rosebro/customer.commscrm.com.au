@@ -1,5 +1,5 @@
 import { authActionTypes } from '../actionTypes';
-
+import { TOKEN_PAYLOAD_KEY } from '../../constants';
 const inititalState = {
     loading: false,
     errorMessage: '',
@@ -43,6 +43,12 @@ const auth = (state = inititalState, action) => {
                 ...state,
                 loading: false,
                 errorMessage: action.payload,
+            };
+        case authActionTypes.LOG_OUT:
+            localStorage.removeItem(TOKEN_PAYLOAD_KEY);
+            return {
+                ...state,
+                loggedInUser: null,
             };
         case authActionTypes.FORGOT_PASSWORD:
         return {
