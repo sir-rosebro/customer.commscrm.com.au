@@ -7,30 +7,31 @@ import { useToken } from '../../hooks/useToken';
 
 import './signin.scss';
 import { signIn } from '../../redux/actions';
+import Loading from '../../components/loading';
 
 const SignIn = () => {
     const dispatch = useDispatch();
     const [, setToken] = useToken();
     const history = useHistory();
-    const { loading, currentUser, errorMessage, token } = useSelector(
+    const { isFetching, loggedInUser } = useSelector(
         ({ auth }) => auth
     );
-    console.log(loading, currentUser, errorMessage);
-    // const signInUser = useCallback((data) => dispatch(signIn(data)), []);
+    console.log(loggedInUser)
 
     const onFinish = (values) => {
         dispatch(signIn(values));
     };
 
     useEffect(() => {
-        if (token) {
-            setToken(token);
+        if (loggedInUser) {
+            setToken(loggedInUser.token);
             history.push('/dashboard');
         }
-    }, [token]);
+    }, [loggedInUser]);
 
     return (
         <div className="sign_in">
+            <Loading isLoading={isFetching}>
             <Form
                 name="normal_login"
                 className="login-form"
@@ -94,18 +95,10 @@ const SignIn = () => {
                     Or <Link to="/sign-up">register now!</Link>
                 </Form.Item>
             </Form>
+        </Loading>
         </div>
     );
 };
 
-// function useSignIn() {
-//     const dispatch = useDispatch();
-//     const { loading, currentUser, errorMessage } = useSelector(({auth}) => auth);
-//     const signInUser = useCallback((data) =>  dispatch(signIn(data)), []);
-//     console.log(loading, currentUser, errorMessage);
-//     useEffect(() => {
-//         signInUser({username: 'heubert', password: '123'});
-//     }, [signInUser]);
-// }
 
 export default SignIn;

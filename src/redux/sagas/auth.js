@@ -17,13 +17,13 @@ import {
 function* signIn() {
     yield takeLatest(authActionTypes.SIGN_IN, function* ({ payload }) {
         try {
-            const { status, token } = yield call(AuthService.signIn, payload);
+            const { status, user, message } = yield call(AuthService.signIn, payload);
             if (status === 'ERROR') {
-                throw Error();
+                throw Error(message);
             }
-            yield put(signInSuccess(token));
-        } catch {
-            const errorMessage = 'Failed to Sign In';
+            yield put(signInSuccess(user));
+        } catch (e) {
+            const errorMessage = e.message || 'Failed to Sign In';
             message.error(errorMessage);
             yield put(signInFail(errorMessage));
         }
@@ -33,13 +33,13 @@ function* signIn() {
 function* signup() {
     yield takeLatest(authActionTypes.SIGN_UP, function* ({ payload }) {
         try {
-            const { status, user } = yield call(AuthService.signup, payload);
+            const { status, user, message } = yield call(AuthService.signup, payload);
             if (status === 'ERROR') {
-                throw Error();
+                throw Error(message);
             }
             yield put(signupSuccess(user));
-        } catch {
-            const errorMessage = 'Failed to Sign Up';
+        } catch(e) {
+            const errorMessage = e.message || 'Failed to Sign Up';
             message.error(errorMessage);
             yield put(signupFail(errorMessage));
         }
